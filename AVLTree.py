@@ -62,7 +62,7 @@ class AVLTree:
         y.parentNode = parent
         node.parentNode = y
         if not parent is None:
-            if parent.leftSubNode == node
+            if parent.leftSubNode == node:
                 parent.leftSubNode = y
             else:
                 parent.rightSubNode = y
