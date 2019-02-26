@@ -11,13 +11,13 @@ class AVLTree:
     rootNode = None
     
     def __init__(self):
-        self.rootNode = Node()
+        self.rootNode = Node(None,None,None,0,None)
     
     def __put(self, number):
         searchedNode = self.search(number)
         if searchedNode.number is None:
             if searchedNode.parentNode is None:
-                rootNode = Node(number,None,None,0,None)
+                self.rootNode = Node(number,None,None,0,None)
             else:
                 searchedNode.number = number
                 if number < searchedNode.parentNode.number:
@@ -34,7 +34,7 @@ class AVLTree:
                 tempNode = searchedNode.parentNode
             
     
-    def __recalculateBalance(node):
+    def __recalculateBalance(self,node):
         leftNum = 0
         if not(node.leftSubNode is None):
             leftNum = node.leftSubNode.getMostSubNodeLevelNum() + 1
@@ -46,12 +46,12 @@ class AVLTree:
         node.offset = rightNum - leftNum
         
         if not(node.leftSubNode is None):
-            __recalculateBalance(node.leftSubNode)
+            self.__recalculateBalance(node.leftSubNode)
         
         if not(node.rightSubNode is None):
-            __recalculateBalance(node.rightSubNode)
+            self.__recalculateBalance(node.rightSubNode)
         
-    def __rotateRight(node):
+    def __rotateRight(self,node):
         if node.leftSubNode is None:
             return
 
@@ -68,7 +68,7 @@ class AVLTree:
                 parent.rightSubNode = y
         return
     
-    def __rotateLeft(node):
+    def __rotateLeft(self,node):
         if node.rightSubNode is None:
             return
         y = node.rightSubNode

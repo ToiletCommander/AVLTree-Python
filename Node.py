@@ -5,13 +5,6 @@ class Node:
     rightSubNode = None
     offset = 0
     parentNode = None
-    
-    def __init__(self):
-        self.number = None
-        self.leftSubNode = None
-        self.rightSubNode = None
-        self.offset = 0
-        self.parentNode = None
 
     def __init__(self, num, leftsub, rightsub, balanceoffset, parent):
         self.number = num
@@ -36,14 +29,14 @@ class Node:
     def recursiveAddBalanceToLeft(self):
         tempNode = self
         while not(tempNode is None):
-            tempNode.balanceoffset -= 1
+            tempNode.offset -= 1
             tempNode = tempNode.parentNode
         return
     
     def recursiveAddBalanceToRight(self):
         tempNode = self
         while not(tempNode is None):
-            tempNode.balanceoffset += 1
+            tempNode.offset += 1
             tempNode = tempNode.parentNode
         return
 
