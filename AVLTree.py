@@ -29,7 +29,7 @@ class AVLTree:
             swappingNodes = []
             tempNode = searchedNode
             while not(tempNode is None):
-                if tempNode.offset < -1 or tempNode.offset > 1
+                if tempNode.offset < -1 or tempNode.offset > 1:
                     swappingNodes.append(tempNode)
                 tempNode = searchedNode.parentNode
             
