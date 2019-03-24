@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+# This AVL Tree referes information from https://www.geeksforgeeks.org/avl-tree-set-1-insertion/
+
 from Node import Node
 import copy
 
@@ -26,13 +28,37 @@ class AVLTree:
                 else:
                     searchedNode.parentNode.rightSubNode = searchedNode
                     searchedNode.parentNode.recursiveAddBalanceToRight()
-            swappingNodes = []
+            swappingNode = None
             tempNode = searchedNode
             while not(tempNode is None):
                 if tempNode.offset < -1 or tempNode.offset > 1:
-                    swappingNodes.append(tempNode)
+                    swappingNode = tempNode
                 tempNode = searchedNode.parentNode
-            
+            if not swappingNode is None:
+                self.__autoRotate(swappingNode)
+
+
+    def __autoRotate(self,node):
+        if node is None:
+            return False
+        if (node.offset >= -1 and node.offset <= 1):
+            return True
+        
+        parent = node.parentNode
+        if parent is None:
+            return False
+
+        if (node.offset < -1 and parent.offset > 1):
+            self.__rotateRight(parent)
+        elif (node.offset > 1 and parent.offset < -1):
+            self.__rotateLeft(node)
+            self.__rotateRight(parent)
+        elif (node.offset > 1 and parent.offset > 1):
+            self.__rotateLeft(parent)
+        elif (node.offset < -1 and parent.offset > 1):
+            self.__rotateRight(node)
+            self.__rotateLeft(parent)
+        return True
     
     def __recalculateBalance(self,node):
         leftNum = 0
